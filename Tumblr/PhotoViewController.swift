@@ -76,14 +76,39 @@ class PhotoViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return cell
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let vc = segue.destination as! PhotoDetailsViewController
+        let cell = sender as! UITableViewCell
+        let indexPath = PhotoTableView.indexPath(for: cell)!
+        
+        let post = posts[indexPath.row]
+        // Configure YourCustomCell using the outlets that you've defined.
+        
+        if let photos = post["photos"] as? [[String: Any]] { // Will be using this to grab the photo url to send to the next screen
+            // photos is NOT nil, we can use it!
+            // TODO: Get the photo url
+            // 1.
+            let photo = photos[0]
+            // 2.
+            let originalSize = photo["original_size"] as! [String: Any]
+            // 3.
+            let urlString = originalSize["url"] as! String
+            
+            
+            vc.urlString = urlString // Next screen will have the url to be able to set the image
+            
+        }
+        
+        
+        
+        
     }
-    */
+    
 
 }
